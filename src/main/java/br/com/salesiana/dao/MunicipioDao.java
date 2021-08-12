@@ -1,4 +1,4 @@
 package br.com.salesiana.dao;
 
-public class Dao {
+public class MunicipioDao {
 }
