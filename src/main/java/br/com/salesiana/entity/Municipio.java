@@ -19,8 +19,8 @@ public class Municipio implements Serializable{
 
     @ManyToOne
     @JoinColumn(name = "id_uf")
-    private FederatedUnit id_uf;
+    private UnidadeFederativa UnidadeFederativa;
 
-    @OneToMany(mappedBy = "Municipio")
-    private List<District> Municipio = new ArrayList<District>();
+    @OneToMany(mappedBy = "Bairro")
+    private List<Bairro> Bairro = new ArrayList<Bairro>();
 }

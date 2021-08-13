@@ -15,6 +15,5 @@ public class Bairro {
     private String nome;
 
     @ManyToOne
-    @JoinColumn(name = "id_municipio")
     private Municipio Municipio;
 }

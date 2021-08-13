@@ -15,10 +15,6 @@ public class Fiscalizacao {
     @Column(name = "data", nullable = false)
     private LocalDate data;
 
-    @ManyToOne
-    @JoinColumn(name = "id_empresa")
-    private Company id_empresa;
-
     @Column(name = "logradouro")
     private String logradouro;
 
@@ -26,14 +22,14 @@ public class Fiscalizacao {
     private String cep;
 
     @ManyToOne
-    @JoinColumn(name = "id_bairro")
-    private District id_bairro;
+    private Empresa Empresa;
 
     @ManyToOne
-    @JoinColumn(name = "id_municipio")
-    private Municipality id_municipio;
+    private Bairro Bairro;
 
     @ManyToOne
-    @JoinColumn(name = "id_uf")
-    private FederatedUnit id_uf;
+    private Municipio Municipio;
+
+    @ManyToOne
+    private UnidadeFederativa UnidadeFederativa;
 }
