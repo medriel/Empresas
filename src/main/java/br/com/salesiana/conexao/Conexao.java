@@ -4,7 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public class Connection {
+public class Conexao {
     private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("empresas");
 
     public static EntityManager getEntityManager() {
