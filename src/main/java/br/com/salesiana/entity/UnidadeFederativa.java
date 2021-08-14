@@ -2,6 +2,7 @@ package br.com.salesiana.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "UnidadeFederativa")
@@ -18,6 +19,16 @@ public class UnidadeFederativa implements Serializable{
     @Column(name = "nome")
     private String nome;
 
+    @OneToMany
+    private List<Municipio> municipios;
+
+    @OneToMany
+    private List<Fiscalizacao> fiscalizacaos;
+
+    public UnidadeFederativa(){
+
+    }
+
     public UnidadeFederativa(
             String sigla,
             String nome
@@ -32,6 +43,10 @@ public class UnidadeFederativa implements Serializable{
 
     public void setName(String nome) {
         this.nome = nome;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getInitials() {

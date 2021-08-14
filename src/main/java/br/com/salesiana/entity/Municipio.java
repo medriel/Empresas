@@ -21,9 +21,23 @@ public class Municipio implements Serializable{
     @JoinColumn(name = "id_uf")
     private UnidadeFederativa unidadeFederativa;
 
+    @OneToMany
+    private List<Bairro> bairros;
+
+    @OneToMany
+    private List<Fiscalizacao> fiscalizacoes;
+
+    public Municipio() {
+
+    }
+
     public Municipio(String nome, UnidadeFederativa unidadeFederativa) {
         this.nome = nome;
         this.unidadeFederativa = unidadeFederativa;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public void setName(String nome) {

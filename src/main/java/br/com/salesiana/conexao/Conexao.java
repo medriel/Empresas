@@ -6,8 +6,9 @@ import javax.persistence.Persistence;
 
 public class Conexao {
     private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("empresas");
+    private static EntityManager entityManager = entityManagerFactory.createEntityManager();
 
     public static EntityManager getEntityManager() {
-        return entityManagerFactory.createEntityManager();
+        return entityManager;
     }
 }

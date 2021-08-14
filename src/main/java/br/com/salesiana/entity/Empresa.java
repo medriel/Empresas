@@ -1,6 +1,7 @@
 package br.com.salesiana.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Empresa")
@@ -18,6 +19,17 @@ public class Empresa {
     @Column(name = "razaoSocial", length = 100, nullable = false)
     private String razaoSocial;
 
+    @OneToMany
+    private List<Fiscalizacao> fiscalizacaos;
+
+    public Empresa(){
+
+    }
+    public Empresa ( String cnpj, String razaoSocial){
+        this.cnpj = cnpj;
+        this.razaoSocial=razaoSocial;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -27,11 +39,6 @@ public class Empresa {
     }
 
     public void setCompanyName(String razaoSocial) {
-        this.razaoSocial = razaoSocial;
-    }
-
-    public Empresa(String cnpj, String razaoSocial) {
-        this.cnpj = cnpj;
         this.razaoSocial = razaoSocial;
     }
 

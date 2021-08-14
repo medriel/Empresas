@@ -1,6 +1,7 @@
 package br.com.salesiana.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Bairro")
@@ -16,6 +17,13 @@ public class Bairro {
 
     @ManyToOne
     private Municipio municipio;
+
+    @OneToMany
+    private List<Fiscalizacao> fiscalizacaos;
+
+    public Bairro(){
+
+    }
 
     public void setName(String nome) {
         this.nome = nome;

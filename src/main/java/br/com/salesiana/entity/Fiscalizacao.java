@@ -33,6 +33,10 @@ public class Fiscalizacao {
     @ManyToOne
     private UnidadeFederativa unidadeFederativa;
 
+    public Fiscalizacao(){
+
+    }
+
     public Fiscalizacao(
             LocalDate data,
             String logradouro,
