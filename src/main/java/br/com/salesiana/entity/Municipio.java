@@ -19,8 +19,27 @@ public class Municipio implements Serializable{
 
     @ManyToOne
     @JoinColumn(name = "id_uf")
-    private UnidadeFederativa UnidadeFederativa;
+    private UnidadeFederativa unidadeFederativa;
 
-    @OneToMany(mappedBy = "Bairro")
-    private List<Bairro> Bairro = new ArrayList<Bairro>();
+    public Municipio(String nome, UnidadeFederativa unidadeFederativa) {
+        this.nome = nome;
+        this.unidadeFederativa = unidadeFederativa;
+    }
+
+    public void setName(String nome) {
+        this.nome = nome;
+    }
+
+    public void setFederatedUnit(UnidadeFederativa unidadeFederativa) {
+        this.unidadeFederativa = unidadeFederativa;
+    }
+
+    @Override
+    public String toString() {
+        return "Municipio{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", unidadeFederativa=" + unidadeFederativa +
+                '}';
+    }
 }

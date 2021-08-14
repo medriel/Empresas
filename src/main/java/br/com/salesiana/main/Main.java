@@ -1,13 +1,12 @@
 package br.com.salesiana.main;
 
-import br.com.salesiana.controller.LeitorDeArquivo;
+import br.com.salesiana.controller.ControladorDeEmpresas;
 
 public class Main {
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
+        ControladorDeEmpresas controladorDeEmpresas = new ControladorDeEmpresas();
+        controladorDeEmpresas.readFileAndSplitData();
 
-        LeitorDeArquivo leitorDeArquivo = new LeitorDeArquivo();
-        leitorDeArquivo.read("Empresas - Santa Catarina.csv");
-        System.exit(0);
         System.exit(0);
     }
 }

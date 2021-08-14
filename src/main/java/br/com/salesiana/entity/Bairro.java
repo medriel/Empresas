@@ -15,5 +15,27 @@ public class Bairro {
     private String nome;
 
     @ManyToOne
-    private Municipio Municipio;
+    private Municipio municipio;
+
+    public void setName(String nome) {
+        this.nome = nome;
+    }
+
+    public Bairro(String nome, Municipio municipio) {
+        this.nome = nome;
+        this.municipio = municipio;
+    }
+
+    public void setMunicipality(Municipio municipio) {
+        this.municipio = municipio;
+    }
+
+    @Override
+    public String toString() {
+        return "District{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", municipio=" + municipio +
+                '}';
+    }
 }
