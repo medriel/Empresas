@@ -1,37 +1,37 @@
 package br.com.salesiana;
 
-import br.com.salesiana.controller.ControladorDeUnidadeFederativa;
-import br.com.salesiana.controller.ControladorDeEmpresas;
-import br.com.salesiana.entity.UnidadeFederativa;
-import br.com.salesiana.utils.LeitorDeArquivo;
+import br.com.salesiana.controller.FederatedUnitController;
+import br.com.salesiana.controller.FiscalizationController;
+import br.com.salesiana.entity.FederatedUnit;
+import br.com.salesiana.utils.FileReader;
 
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        LeitorDeArquivo leitorDeArquivo = new LeitorDeArquivo();
-        Scanner statesScanner = leitorDeArquivo.read("estados.txt");
+        FileReader fileReader = new FileReader();
+        Scanner statesScanner = fileReader.read("estados.txt");
 
         while(statesScanner.hasNext()) {
             String row = statesScanner.next();
             String[] items = row.split(",");
-            String id_uf = items[0].trim();
-            String sigla = items[1].trim();
+            String federatedUnitName = items[0].trim();
+            String federatedUnitInitials = items[1].trim();
 
-            ControladorDeUnidadeFederativa controladorDeUnidadeFederativa = new ControladorDeUnidadeFederativa();
-            controladorDeUnidadeFederativa.create(new UnidadeFederativa(sigla, id_uf));
+            FederatedUnitController federatedUnitController = new FederatedUnitController();
+            federatedUnitController.create(new FederatedUnit(federatedUnitInitials, federatedUnitName));
         }
 
         statesScanner.close();
 
-        Scanner fiscalizationScanner = leitorDeArquivo.read("Empresas - Santa Catarina.csv");
+        Scanner fiscalizationScanner = fileReader.read("Empresas - Santa Catarina.csv");
         fiscalizationScanner.next(); // skips first row
 
         while(fiscalizationScanner.hasNext()) {
             String[] items = fiscalizationScanner.next().split(";");
 
-            ControladorDeEmpresas controladorDeEmpresas = new ControladorDeEmpresas();
-            controladorDeEmpresas.createFiscalization(items);
+            FiscalizationController fiscalizationController = new FiscalizationController();
+            fiscalizationController.createFiscalization(items);
         }
 
         fiscalizationScanner.close();
