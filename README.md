@@ -9,3 +9,6 @@
 3- Use JPA para fazer a persistir os objetos  na base de dados.
 
 4- Utilize o Astah para modelas as classes de objetos, somente use o diagrama de classes de objetos.
+
+![image](https://user-images.githubusercontent.com/74268252/129646144-d357003e-c32a-410a-b09c-1b6e14455798.png)
+
