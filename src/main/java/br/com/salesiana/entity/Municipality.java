@@ -44,6 +44,14 @@ public class Municipality implements Serializable {
         this.federatedUnit = federatedUnit;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public FederatedUnit getFederatedUnit() {
+        return federatedUnit;
+    }
+
     @Override
     public String toString() {
         return "Municipality{" +
