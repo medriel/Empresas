@@ -1,15 +1,13 @@
 package br.com.salesiana;
 
 import br.com.salesiana.controller.FederatedUnitController;
-import br.com.salesiana.controller.FiscalizationController;
 import br.com.salesiana.entity.FederatedUnit;
 
-public class Importer implements Processor{
+public class ImporterFederativeUnits implements Processor{
 
     private FederatedUnitController federatedUnitController = new FederatedUnitController();
-    private FiscalizationController fiscalizationController = new FiscalizationController();
 
-    public void importFederativeUnits() throws Exception{
+    public ImporterFederativeUnits(){
 
         DataReader reader = new DataReader("estados.txt");
         reader.read(this);
@@ -22,17 +20,4 @@ public class Importer implements Processor{
 
         federatedUnitController.create(new FederatedUnit(federatedUnitInitials, federatedUnitName));
     }
-
-//    public void importFiscalizations() throws Exception{
-//        Scanner fiscalizationScanner = FileReader.read("Empresas - Santa Catarina.csv");
-//        fiscalizationScanner.next();
-//
-//        while(fiscalizationScanner.hasNext()) {
-//            String[] items = fiscalizationScanner.next().split(";");
-//
-//            fiscalizationController.createFiscalization(items);
-//        }
-//
-//        fiscalizationScanner.close();
-//    }
 }

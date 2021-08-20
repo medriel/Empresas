@@ -5,8 +5,9 @@ import br.com.salesiana.entity.FederatedUnit;
 
 
 public class FederatedUnitController {
+    FederatedUnitDao federatedUnitDao = new FederatedUnitDao();
+
     public FederatedUnit create(FederatedUnit federatedUnit) {
-        FederatedUnitDao federatedUnitDao = new FederatedUnitDao();
         FederatedUnit existingFederatedUnit = federatedUnitDao.getByInitials(federatedUnit.getInitials());
 
         if(existingFederatedUnit == null) {
@@ -14,5 +15,9 @@ public class FederatedUnitController {
         }
 
         return federatedUnit;
+    }
+
+    public FederatedUnit getByName(String name) {
+        return federatedUnitDao.getByName(name);
     }
 }
