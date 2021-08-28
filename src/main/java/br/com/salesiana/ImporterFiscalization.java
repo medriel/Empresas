@@ -2,51 +2,39 @@ package br.com.salesiana;
 
 import br.com.salesiana.controller.*;
 import br.com.salesiana.entity.*;
+import br.com.salesiana.utils.FiscalizationCSV;
 
-import java.time.LocalDate;
+public class ImporterFiscalization implements Processor {
 
-public class ImporterFiscalization implements Processor{
+    private FederatedUnitController federatedUnitController = new FederatedUnitController();
+    private MunicipalityController municipalityController = new MunicipalityController();
+    private DistrictController districtController = new DistrictController();
+    private CompanyController companyController = new CompanyController();
+    private FiscalizationController fiscalizationController = new FiscalizationController();
 
-    FederatedUnitController federatedUnitController = new FederatedUnitController();
-    MunicipalityController municipalityController = new MunicipalityController();
-    DistrictController districtController = new DistrictController();
-    CompanyController companyController = new CompanyController();
-    FiscalizationController fiscalizationController = new FiscalizationController();
-
-    public void importFiscalizations() throws Exception {
+    public void importFiscalizations(){
         DataReader reader = new DataReader("Empresas - Santa Catarina.csv");
         reader.read(this);
     }
 
     @Override
-    public void run(String row) throws Exception {
-        String[] arrayItems = row.split(";");
-        String  monthAndYear = arrayItems[1];
-        LocalDate date = LocalDate.parse(monthAndYear.replace("/", "-") + "-01");
-        String cnpj = arrayItems[2];
-        String companyName = arrayItems[3];
-        String publicPlace = arrayItems[4];
-        String postalCode = arrayItems[5];
-        String districtName = arrayItems[6];
-        String municipalityName = arrayItems[7];
-        String federatedUnitName = arrayItems[8].trim();
+    public void run(String row){
 
-        FederatedUnit federatedUnit = federatedUnitController.getByName(federatedUnitName);
+        FiscalizationCSV csv = new FiscalizationCSV(row);
 
-        Municipality municipality =  municipalityController.create(municipalityName, federatedUnit.getId());
+        FederatedUnit federatedUnit = federatedUnitController.getByName(csv.getFederatedUnitName());
+        Municipality municipality = municipalityController.create(csv.getMunicipalityName(), federatedUnit.getId());
+        District district = districtController.create(csv.getDistrictName(), municipality);
+        Company company = companyController.create(csv.getCnpj(), csv.getCompanyName());
 
-        District district =  districtController.create(districtName,municipality);
+        Fiscalization fiscalizationParam = new Fiscalization();
+        fiscalizationParam.setCompany(company);
+        fiscalizationParam.setDate(csv.getDate());
+        fiscalizationParam.setPublicPlace(csv.getPublicPlace());
 
-        Company company = companyController.create(cnpj,companyName);
+        fiscalizationParam.setFederatedUnit(federatedUnit);
 
-        Fiscalization fiscalization = fiscalizationController.create(
-                date,
-                publicPlace,
-                postalCode,
-                company,
-                district,
-                municipality,
-                federatedUnit);
+        Fiscalization fiscalization = fiscalizationController.create(fiscalizationParam);
 
     }
 }
