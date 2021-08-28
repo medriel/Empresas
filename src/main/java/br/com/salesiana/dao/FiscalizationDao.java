@@ -1,9 +1,11 @@
 package br.com.salesiana.dao;
 
 import br.com.salesiana.connection.Connection;
+import br.com.salesiana.entity.Company;
 import br.com.salesiana.entity.Fiscalization;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import java.time.LocalDate;
 
@@ -20,27 +22,24 @@ public class FiscalizationDao {
         entityManager.getTransaction().commit();
     }
 
-    public Fiscalization getFiscalizationFromDateAndPostalCodeAndPublicPlace(
+    public Fiscalization findByFromDateAndPostalCodeAndPublicPlace(
             LocalDate date,
-            String postalCode,
-            String publicPlace
+            Company company
     ) {
         StringBuilder jpql = new StringBuilder();
         jpql.append("select f from Fiscalization f ");
+        jpql.append("join f.company c ");
         jpql.append("where f.date = :date ");
-        jpql.append("and f.postalCode = :postalCode ");
-        jpql.append("and f.publicPlace = :publicPlace");
+        jpql.append("and c.id = :companyId");
 
         TypedQuery<Fiscalization> query = entityManager.createQuery(jpql.toString(), Fiscalization.class);
 
         query.setParameter("date", date);
-        query.setParameter("postalCode", postalCode);
-        query.setParameter("publicPlace", publicPlace);
-        query.setMaxResults(1);
+        query.setParameter("companyId", company.getId());
 
         try {
             return query.getSingleResult();
-        } catch (Exception e) {
+        } catch (NoResultException e) {
             return null;
         }
     }
