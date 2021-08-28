@@ -13,7 +13,7 @@ public class FiscalizationController {
 
     public Fiscalization create(Fiscalization fiscalizationParam) {
         try {
-            Fiscalization fiscalization = fiscalizationDao.findByFromDateAndPostalCodeAndPublicPlace(fiscalizationParam.getDate(), fiscalizationParam.getCompany());
+            Fiscalization fiscalization = fiscalizationDao.findByFromDateAndCompany(fiscalizationParam.getDate(), fiscalizationParam.getCompany());
             if (fiscalization == null) {
                 fiscalizationDao.save(fiscalizationParam);
                 return fiscalizationParam;

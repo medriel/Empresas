@@ -22,7 +22,7 @@ public class FiscalizationDao {
         entityManager.getTransaction().commit();
     }
 
-    public Fiscalization findByFromDateAndPostalCodeAndPublicPlace(
+    public Fiscalization findByFromDateAndCompany(
             LocalDate date,
             Company company
     ) {
