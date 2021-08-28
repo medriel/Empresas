@@ -32,7 +32,8 @@ public class Fiscalization {
     @ManyToOne
     private FederatedUnit federatedUnit;
 
-    public Fiscalization() { }
+    public Fiscalization() {
+    }
 
     public Fiscalization(
             LocalDate date,
@@ -52,28 +53,64 @@ public class Fiscalization {
         this.federatedUnit = federatedUnit;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public String getPublicPlace() {
+        return publicPlace;
     }
 
     public void setPublicPlace(String publicPlace) {
         this.publicPlace = publicPlace;
     }
 
+    public String getPostalCode() {
+        return postalCode;
+    }
+
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
+    }
+
+    public Company getCompany() {
+        return company;
     }
 
     public void setCompany(Company company) {
         this.company = company;
     }
 
+    public District getDistrict() {
+        return district;
+    }
+
     public void setDistrict(District district) {
         this.district = district;
     }
 
+    public Municipality getMunicipality() {
+        return municipality;
+    }
+
     public void setMunicipality(Municipality municipality) {
         this.municipality = municipality;
+    }
+
+    public FederatedUnit getFederatedUnit() {
+        return federatedUnit;
     }
 
     public void setFederatedUnit(FederatedUnit federatedUnit) {
